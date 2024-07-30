@@ -1,12 +1,19 @@
-/* styles/Header.module.css */
 .header {
-    background-color: #353839;
-    height: 90px;
-    top: -200px;
+  background-color: #2f2f2f;
+  height: 100px;
+  display: flex;
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  padding: 0 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; /* Ensure it stays above other content */
 }
-  
+
 .header h1 {
-    color: white;
-    font-size: 2rem;
-    left: 700px;
+  color: white;
+  font-size: 2rem;
+  margin: 0; /* Remove default margin */
 }
