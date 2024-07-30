@@ -1,0 +1,40 @@
+/* styles/Board.module.css */
+.board {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  flex-wrap: wrap;
+  background-color: #2f2f2f;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.category {
+  width: 30%;
+  margin: 20px 10px;
+}
+
+.category h2 {
+  text-align: center;
+  color: white;
+  background-color: #2f2f2f;
+  padding: 10px;
+  border-radius: 5px;
+  position: relative;
+  top: -20px;
+  font-size: 1.5em;
+}
+
+.category h2::after {
+  content: '';
+  display: block;
+  height: 5px;
+  width: 100px;
+  background-color: #61dafb;
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
+.loadMoreButton {
+  display: none;
+}
