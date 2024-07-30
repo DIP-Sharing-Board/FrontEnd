@@ -1,42 +1,68 @@
-// components/Board.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Card from './Card';
 import styles from '../styles/Board.module.css';
 
 const Board = () => {
-  const [campActivities, setCampActivities] = useState([]);
-  const [competitionActivities, setCompetitionActivities] = useState([]);
-  const [othersActivities, setOthersActivities] = useState([]);
-  const [campUpdatedAt, setCampUpdatedAt] = useState(null);
-  const [competitionUpdatedAt, setCompetitionUpdatedAt] = useState(null);
-  const [othersUpdatedAt, setOthersUpdatedAt] = useState(null);
+  const [activities, setActivities] = useState({
+    camp: [],
+    competition: [],
+    other: [],
+  });
+  const [updatedAt, setUpdatedAt] = useState({
+    camp: null,
+    competition: null,
+    other: null,
+  });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const fetchActivities = async (type, lastUpdatedAt) => {
+    try {
+      const url = lastUpdatedAt 
+        ? `http://localhost:5000/api/v1/activities?type=${type}&updatedAt=${lastUpdatedAt}`
+        : `http://localhost:5000/api/v1/activities?type=${type}`;
+      const response = await axios.get(url);
+      console.log(response.data.data)
+      return response.data;
+    } catch (err) {
+      throw new Error(`Failed to fetch ${type} activities: ${err.message}`);
+    }
+  };
+
   useEffect(() => {
-    const fetchActivities = async (type, updatedAt, setActivities, setUpdatedAt) => {
+    const fetchAllActivities = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/v1/activities?type=${type}&updatedAt=${updatedAt}`);
-        setActivities(response.data.activities);
-        setUpdatedAt(response.data.updatedAt);
+        const [campData, competitionData, otherData] = await Promise.all([
+          fetchActivities('camp', updatedAt.camp),
+          fetchActivities('competition', updatedAt.competition),
+          fetchActivities('other', updatedAt.other),
+        ]);
+
+        setActivities({
+          camp: campData.activities || [],
+          competition: competitionData.activities || [],
+          other: otherData.activities || [],
+        });
+
+        setUpdatedAt({
+          camp: campData.updatedAt,
+          competition: competitionData.updatedAt,
+          other: otherData.updatedAt,
+        });
+
+        setLoading(false);
       } catch (err) {
         setError(err.message);
+        setLoading(false);
       }
-    };
-
-    const fetchAllActivities = () => {
-      fetchActivities('camp', campUpdatedAt, setCampActivities, setCampUpdatedAt);
-      fetchActivities('competition', competitionUpdatedAt, setCompetitionActivities, setCompetitionUpdatedAt);
-      fetchActivities('others', othersUpdatedAt, setOthersActivities, setOthersUpdatedAt);
-      setLoading(false);
     };
 
     fetchAllActivities();
     const interval = setInterval(fetchAllActivities, 10000);
 
     return () => clearInterval(interval);
-  }, [campUpdatedAt, competitionUpdatedAt, othersUpdatedAt]);
+  }, [updatedAt]);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -48,50 +74,22 @@ const Board = () => {
 
   return (
     <div className={styles.board}>
-      <div className={styles.category}>
-        <h2 className={styles.categoryTitle}>Camp</h2>
-        {campActivities.map((activity, index) => (
-          <Card
-            key={index}
-            title={activity.title}
-            category="camp"
-            description={activity.description}
-            imageUrl={activity.imageUrl}
-            date={activity.date}
-            qrCodeUrl={activity.qrCodeUrl}
-          />
-        ))}
-      </div>
-
-      <div className={styles.category}>
-        <h2 className={styles.categoryTitle}>Competition</h2>
-        {competitionActivities.map((activity, index) => (
-          <Card
-            key={index}
-            title={activity.title}
-            category="competition"
-            description={activity.description}
-            imageUrl={activity.imageUrl}
-            date={activity.date}
-            qrCodeUrl={activity.qrCodeUrl}
-          />
-        ))}
-      </div>
-
-      <div className={styles.category}>
-        <h2 className={styles.categoryTitle}>Others</h2>
-        {othersActivities.map((activity, index) => (
-          <Card
-            key={index}
-            title={activity.title}
-            category="others"
-            description={activity.description}
-            imageUrl={activity.imageUrl}
-            date={activity.date}
-            qrCodeUrl={activity.qrCodeUrl}
-          />
-        ))}
-      </div>
+      {['camp', 'competition', 'other'].map((category) => (
+        <div key={category} className={styles.category}>
+          <h2 className={styles.categoryTitle}>{category.charAt(0).toUpperCase() + category.slice(1)}</h2>
+          {activities[category] && activities[category].map((activity, index) => (
+            <Card
+              key={index}
+              title={activity.title}
+              category={category}
+              description={activity.description}
+              imageUrl={activity.imageUrl}
+              date={activity.date}
+              qrCodeUrl={activity.qrCodeUrl}
+            />
+          ))}
+        </div>
+      ))}
     </div>
   );
 };
