@@ -1,27 +1,12 @@
 /* styles/Header.module.css */
 .header {
     background-color: #353839;
-    padding: 20px;
+    height: 90px;
+    top: -200px;
+}
+  
+.header h1 {
     color: white;
-  }
-  
-  .header h1 {
-    margin: 0;
-  }
-  
-  .header nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 10px 0 0 0;
-  }
-  
-  .header nav ul li {
-    display: inline;
-    margin: 0 10px;
-    color: #61dafb;
-    cursor: pointer;
-  }
-  
-  .header nav ul li:hover {
-    text-decoration: underline;
-  }
+    font-size: 2rem;
+    left: 700px;
+}

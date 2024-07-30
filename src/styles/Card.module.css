@@ -1,56 +1,29 @@
-/* styles/Card.module.css */
 .card {
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 20px;
-    margin: 20px 0;
-    text-align: left;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .card img {
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-  }
-  
-  .qrCode {
-    margin-top: 10px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .camp {
-    border-top: 10px solid blue;
-  }
-  
-  .competition {
-    border-top: 10px solid red;
-  }
-  
-  .others {
-    border-top: 10px solid yellow;
-  }
-  
-  .card h2 {
-    font-size: 1.2em;
-    margin: 10px 0;
-  }
-  
-  .card p {
-    margin: 10px 0;
-  }
-  
-  .card .date {
-    font-weight: bold;
-  }
-  
-  .scanHere {
-    text-align: center;
-    margin-top: 10px;
-    font-size: 1em;
-    color: #555;
-  }
-  
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px 8px 0 0;
+}
+
+.qrCode {
+  margin-top: 16px;
+}
+
+.camp {
+  background-color: #e0f7fa;
+}
+
+.competition {
+  background-color: #fff3e0;
+}
+
+.other {
+  background-color: #e8f5e9;
+}

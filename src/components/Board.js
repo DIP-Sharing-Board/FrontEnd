@@ -19,11 +19,12 @@ const Board = () => {
 
   const fetchActivities = async (type, lastUpdatedAt) => {
     try {
+      console.log(`Fetching activities for: ${type}`); // Log the topic (category) being fetched
       const url = lastUpdatedAt 
         ? `http://localhost:5000/api/v1/activities?type=${type}&updatedAt=${lastUpdatedAt}`
         : `http://localhost:5000/api/v1/activities?type=${type}`;
       const response = await axios.get(url);
-      console.log(response.data.data)
+      console.log(response.data.data);
       return response.data;
     } catch (err) {
       throw new Error(`Failed to fetch ${type} activities: ${err.message}`);
@@ -38,6 +39,10 @@ const Board = () => {
           fetchActivities('competition', updatedAt.competition),
           fetchActivities('other', updatedAt.other),
         ]);
+
+        console.log('Camp Activities:', campData.activities);
+        console.log('Competition Activities:', competitionData.activities);
+        console.log('Other Activities:', otherData.activities);
 
         setActivities({
           camp: campData.activities || [],
@@ -59,7 +64,7 @@ const Board = () => {
     };
 
     fetchAllActivities();
-    const interval = setInterval(fetchAllActivities, 10000);
+    const interval = setInterval(fetchAllActivities, 99999);
 
     return () => clearInterval(interval);
   }, [updatedAt]);
