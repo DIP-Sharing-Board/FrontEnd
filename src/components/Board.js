@@ -1,24 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Card from './Card';
+import Category from '../components/Category';
 import styles from '../styles/Board.module.css';
-
-const Category = ({ title, activities }) => (
-  <div className={styles.category}>
-    <h2 className={styles.categoryTitle}>{title}</h2>
-    {activities.map((activity, index) => (
-      <Card
-        key={index}
-        title={activity.title}
-        category={title.toLowerCase()}
-        description={activity.description}
-        imageUrl={activity.imageUrl}
-        date={activity.date}
-        qrCodeUrl={activity.qrCodeUrl}
-      />
-    ))}
-  </div>
-);
 
 const Board = () => {
   const [activities, setActivities] = useState({
@@ -36,15 +19,16 @@ const Board = () => {
 
   const fetchActivities = async (type, lastUpdatedAt) => {
     try {
-      console.log(`Fetching activities for: ${type}`);
       const url = lastUpdatedAt 
         ? `http://localhost:5000/api/v1/activities?type=${type}&updatedAt=${lastUpdatedAt}`
         : `http://localhost:5000/api/v1/activities?type=${type}`;
+      console.log(`Fetching activities for: ${type} from ${url}`);
       const response = await axios.get(url);
-      console.log(response.data);
+      console.log(`Data for ${type}:`, response.data);
       return response.data;
     } catch (err) {
-      throw new Error(`Failed to fetch ${type} activities: ${err.message}`);
+      console.error(`Failed to fetch ${type} activities: ${err.message}`);
+      throw err;
     }
   };
 
@@ -56,6 +40,8 @@ const Board = () => {
           fetchActivities('competition', updatedAt.competition),
           fetchActivities('other', updatedAt.other),
         ]);
+
+        console.log('Fetched Data:', { campData, competitionData, otherData });
 
         setActivities({
           camp: campData.activities || [],
@@ -71,12 +57,13 @@ const Board = () => {
 
         setLoading(false);
       } catch (err) {
+        console.error('Error fetching all activities:', err);
         setError(err.message);
         setLoading(false);
       }
     };
 
-    // fetchAllActivities();
+    fetchAllActivities();
     const interval = setInterval(fetchAllActivities, 10000);
 
     return () => clearInterval(interval);
@@ -90,14 +77,18 @@ const Board = () => {
     return <p>Error: {error}</p>;
   }
 
+  console.log('Activities:', activities);
+
   return (
     <div className={styles.board}>
       {['camp', 'competition', 'other'].map((category) => (
-        <Category
-          key={category}
-          title={category.charAt(0).toUpperCase() + category.slice(1)}
-          activities={activities[category]}
-        />
+        <div key={category}>
+          <Category
+            title={category.charAt(0).toUpperCase() + category.slice(1)}
+            activities={activities[category] || []} // Ensure activities is always an array
+            imageUrl={category === 'other' && activities.other.length > 0 ? activities.other[0].imageUrl : null} // Pass imageUrl for "Other" category
+          />
+        </div>
       ))}
     </div>
   );

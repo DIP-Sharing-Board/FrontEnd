@@ -4,7 +4,7 @@
   display: flex;
   align-items: flex-start; /* Align items to the top */
   justify-content: space-around; /* Distribute categories evenly */
-  padding: 20px;
+  padding: 10px;
   position: fixed;
   top: 100px;
   left: 0;
@@ -16,7 +16,6 @@
 .category {
   width: 30%;
   margin: 20px 10px;
-  background-color: #2F3132;
   border-radius: 10px;
   padding: 10px;
 }
@@ -26,8 +25,8 @@
   color: white;
   background-color: #3C3F40;
   padding: 10px;
-  border-radius: 5px;
-  font-size: 1.9em;
+  font-size: 2rem;
+  margin-top: -20px; /* Move the headings up by 50px */
 }
 
 .category h2::after {
@@ -38,6 +37,7 @@
   background-color: #61dafb;
   margin: 10px auto 0; /* Adjusted margin for better spacing */
   border-radius: 4px;
+  margin-top: 20px;
 }
 
 .loadMoreButton {

@@ -1,15 +1,28 @@
-import React from 'react';
-import QRCode from 'qrcode.react';
+import React, { useState, useEffect } from 'react';
 import styles from '../styles/Card.module.css';
 
-const Card = ({ title, category, description, imageUrl, date, qrCodeUrl }) => {
+const Card = ({ title, category, description, imageUrls, date }) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    if (imageUrls && imageUrls.length > 1) {
+      const interval = setInterval(() => {
+        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % imageUrls.length);
+      }, 20000); // Change image every 20 seconds
+
+      return () => clearInterval(interval);
+    }
+  }, [imageUrls]);
+
   return (
-    <div className={`${styles.card} ${styles[category]}`} style={{ border: '1px solid black', padding: '10px', margin: '10px' }}>
-      <img src={imageUrl || 'default-image-url.jpg'} alt={title || 'No Title'} className={styles.image} style={{ width: '100px', height: '100px' }} />
-      <h2>{title || 'No Title'}</h2>
-      <p>{description || 'No Description'}</p>
-      <p><strong>Date:</strong> {date || 'No Date'}</p>
-      <QRCode value={qrCodeUrl || 'default-url'} size={100} className={styles.qrCode} />
+    <div className={styles.card}>
+      {imageUrls && imageUrls.length > 0 && (
+        <img src={imageUrls[currentImageIndex]} alt={image} className={styles.cardImage} />
+      )}
+      <h3 className={styles.cardTitle}>{title}</h3>
+      <p className={styles.cardCategory}>{category}</p>
+      <p className={styles.cardDescription}>{description}</p>
+      <p className={styles.cardDate}>{date}</p>
     </div>
   );
 };

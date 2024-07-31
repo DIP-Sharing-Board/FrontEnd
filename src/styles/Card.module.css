@@ -1,29 +1,35 @@
 .card {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 16px;
-  margin: 16px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 10px 0;
+  background-color: #fff;
+  text-align: center;
 }
 
-.image {
-  width: 100%;
+.cardImage {
+  max-width: 100%;
   height: auto;
-  border-radius: 8px 8px 0 0;
+  border-radius: 10px;
+  margin-bottom: 10px;
 }
 
-.qrCode {
-  margin-top: 16px;
+.cardTitle {
+  font-size: 1.5em;
+  margin-bottom: 10px;
 }
 
-.camp {
-  background-color: #e0f7fa;
+.cardCategory {
+  font-size: 1.2em;
+  margin-bottom: 10px;
 }
 
-.competition {
-  background-color: #fff3e0;
+.cardDescription {
+  font-size: 1em;
+  margin-bottom: 10px;
 }
 
-.other {
-  background-color: #e8f5e9;
+.cardDate {
+  font-size: 0.9em;
+  color: #777;
 }
