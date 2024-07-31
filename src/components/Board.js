@@ -82,11 +82,12 @@ const Board = () => {
   return (
     <div className={styles.board}>
       {['camp', 'competition', 'other'].map((category) => (
-        <div key={category}>
+        <div key={category} className={styles.category}>
           <Category
             title={category.charAt(0).toUpperCase() + category.slice(1)}
-            activities={activities[category] || []} // Ensure activities is always an array
-            imageUrl={category === 'other' && activities.other.length > 0 ? activities.other[0].imageUrl : null} // Pass imageUrl for "Other" category
+            category={category}
+            activities={activities[category] || []}
+            imageUrl={category === 'other' && activities.other.length > 0 ? activities.other[0].imageUrl : null}
           />
         </div>
       ))}

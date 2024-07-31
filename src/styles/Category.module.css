@@ -5,25 +5,27 @@
   }
   
   .categoryTitle {
-    font-size: 1.5em;
+    font-size: 2rem;
     margin-bottom: 8px;
     color: white;
     position: relative;
+    margin-top: -10px;
+    top: -25px; /* Move the heading up by 25px */
   }
   
   .categoryTitle::after {
     content: '';
     display: block;
-    height: 13px;
+    height: 14px;
     width: 140px;
     margin: 10px auto 0;
-    border-radius: 18px;
+    border-radius: 25px;
     margin-top: 20px;
     background-color: #61dafb; /* Default underline color */
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    bottom: -15px; /* Adjust to position the underline correctly */
+    bottom: -25px; /* Adjust to position the underline correctly */
   }
   
   .competition .categoryTitle::after {
