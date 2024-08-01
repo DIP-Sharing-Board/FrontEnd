@@ -9,6 +9,11 @@ const Board = () => {
     competition: [],
     other: [],
   });
+  const [currentIndices, setCurrentIndices] = useState({
+    camp: 0,
+    competition: 0,
+    other: 0,
+  });
   const [updatedAt, setUpdatedAt] = useState({
     camp: null,
     competition: null,
@@ -44,9 +49,9 @@ const Board = () => {
         console.log('Fetched Data:', { campData, competitionData, otherData });
 
         setActivities({
-          camp: campData.activities || [],
-          competition: competitionData.activities || [],
-          other: otherData.activities || [],
+          camp: campData.data || [],
+          competition: competitionData.data || [],
+          other: otherData.data || [],
         });
 
         setUpdatedAt({
@@ -69,6 +74,18 @@ const Board = () => {
     return () => clearInterval(interval);
   }, [updatedAt]);
 
+  useEffect(() => {
+    const switchInterval = setInterval(() => {
+      setCurrentIndices((prevIndices) => ({
+        camp: activities.camp.length > 0 ? (prevIndices.camp + 1) % activities.camp.length : 0,
+        competition: activities.competition.length > 0 ? (prevIndices.competition + 1) % activities.competition.length : 0,
+        other: activities.other.length > 0 ? (prevIndices.other + 1) % activities.other.length : 0,
+      }));
+    }, 25000); // Switch every 25 seconds
+
+    return () => clearInterval(switchInterval);
+  }, [activities]);
+
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -82,12 +99,11 @@ const Board = () => {
   return (
     <div className={styles.board}>
       {['camp', 'competition', 'other'].map((category) => (
-        <div key={category} className={styles.category}>
+        <div key={category}>
           <Category
             title={category.charAt(0).toUpperCase() + category.slice(1)}
-            category={category}
-            activities={activities[category] || []}
-            imageUrl={category === 'other' && activities.other.length > 0 ? activities.other[0].imageUrl : null}
+            activities={activities[category] || []} // Ensure activities is always an array
+            currentIndex={currentIndices[category]} // Pass the current index for switching
           />
         </div>
       ))}
