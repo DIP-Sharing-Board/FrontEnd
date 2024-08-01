@@ -21,6 +21,15 @@ const Category = ({ activities = [], title }) => {
       <h2 className={styles.categoryTitle}>{title}</h2>
       {currentActivity.imageUrl && (
         <div className={styles.rectangle}>
+          <div className={styles.redflag}>
+            <img src="/redflag.svg" alt="Red Flag" />
+          </div>
+          <div className={styles.blueflag}>
+            <img src="/blueflag.svg" alt="Blue Flag" />
+          </div>
+          <div className={styles.yellowflag}>
+            <img src="/yellowflag.svg" alt="Yellow Flag" />
+          </div>
           <Card
             title={currentActivity.title}
             category={currentActivity.category}
