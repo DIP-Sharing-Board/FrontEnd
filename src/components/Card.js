@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { format } from 'date-fns';
 import { th } from 'date-fns/locale';
+import QRCode from 'qrcode.react';
 import styles from '../styles/Card.module.css';
 
 const formatThaiDate = (dateString) => {
@@ -11,7 +12,7 @@ const formatThaiDate = (dateString) => {
   return `${day} ${month} ${year}`;
 };
 
-const Card = ({ title, category, description, imageUrls, date, deadline, topic }) => {
+const Card = ({ title, category, description, imageUrls, date, deadline, topic, link }) => {
   const topicRef = useRef(null);
 
   useEffect(() => {
@@ -63,7 +64,11 @@ const Card = ({ title, category, description, imageUrls, date, deadline, topic }
       <p className={styles.cardCategory}>{category}</p>
       <p className={styles.cardDescription}>{description}</p>
       <p className={styles.cardDate}>{date}</p>
-    <p className={styles.cardDeadline}>ปิดรับสมัครวันที่ {formatThaiDate(deadline)}</p>
+      <div className={styles.qrCodeBox}>
+      <p className={styles.cardDeadline}>ปิดรับสมัครวันที่ {formatThaiDate(deadline)}</p>
+        <div className={styles.scan}>scan here</div>
+        <QRCode value={link} size={128} />
+      </div>
     </div>
   );
 };

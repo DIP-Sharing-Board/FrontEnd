@@ -36,6 +36,7 @@ const Category = ({ activities = [], title }) => {
             imageUrls={[currentActivity.imageUrl]}
             deadline={currentActivity.deadline || "No deadline"}
             topic={currentActivity.topic || "No topic"}
+            link={currentActivity.link} // Pass the link to the Card component
           />
         </div>
       )}

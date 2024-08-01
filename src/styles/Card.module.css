@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'TH Sarabun New';
+  src: url('/fonts/THSarabunNew.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .card {
   padding: 20px;
   text-align: center;
@@ -46,12 +53,15 @@
 }
 
 .cardDeadline {
-  font-size: 1.5em;
-  color: #ffffff;
+  font-family: 'TH Sarabun New', sans-serif;
+  font-size: 2.1rem;
+  font-weight: lighter;
+  color: #EDEDED;
   position: absolute; /* Position relative to the card */
-  bottom: -485px; /* Align to the bottom of the card */
-  left: 30%;
-  transform: translateX(-50%);
+  bottom: -20px; /* Align to the bottom of the card */
+  left: -140%;
+  margin-left: -230px;
+  letter-spacing: 2px;
 }
 
 .cardCategory {
@@ -67,4 +77,21 @@
 .cardDate {
   font-size: 0.9em;
   color: #777;
+}
+
+/* Add these styles to your Card.module.css */
+
+.qrCodeBox {
+  position: fixed;
+  text-align: center;
+  margin-top: 10px;
+  top: 835px;
+  margin-left: 420px;
+}
+
+.scan {
+  font-size: 1.2rem;
+  color: #D7D8DD;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
 }
