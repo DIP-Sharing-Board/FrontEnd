@@ -9,7 +9,7 @@ const Category = ({ activities = [], title }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % activities.length);
-    }, 20000); // Switch every 20 seconds
+    }, 25000); // Switch every 25 seconds
 
     return () => clearInterval(interval); // Cleanup on unmount
   }, [activities.length]);
@@ -24,9 +24,7 @@ const Category = ({ activities = [], title }) => {
           <Card
             title={currentActivity.title}
             category={currentActivity.category}
-            description={currentActivity.description || "No description"}
             imageUrls={[currentActivity.imageUrl]}
-            date={currentActivity.date || "No date"}
             deadline={currentActivity.deadline || "No deadline"}
             topic={currentActivity.topic || "No topic"}
           />

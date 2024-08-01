@@ -48,10 +48,11 @@ const Board = () => {
 
         console.log('Fetched Data:', { campData, competitionData, otherData });
 
+        // Limit each category to the 20 latest entries
         setActivities({
-          camp: campData.data || [],
-          competition: competitionData.data || [],
-          other: otherData.data || [],
+          camp: (campData.data || []).slice(-20),
+          competition: (competitionData.data || []).slice(-20),
+          other: (otherData.data || []).slice(-20),
         });
 
         setUpdatedAt({
@@ -81,7 +82,7 @@ const Board = () => {
         competition: activities.competition.length > 0 ? (prevIndices.competition + 1) % activities.competition.length : 0,
         other: activities.other.length > 0 ? (prevIndices.other + 1) % activities.other.length : 0,
       }));
-    }, 25000); // Switch every 25 seconds
+    }, 20000); // Switch every 20 seconds
 
     return () => clearInterval(switchInterval);
   }, [activities]);

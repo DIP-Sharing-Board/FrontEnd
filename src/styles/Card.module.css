@@ -5,28 +5,39 @@
 }
 
 .cardImage {
-  max-width: calc(100% - 20px); /* Ensure the image fits within the rectangle */
-  max-height: calc(100% - 20px); /* Ensure the image fits within the rectangle */
+  max-width: calc(75%); /* Ensure the image fits within the rectangle */
+  max-height: calc(75%); /* Ensure the image fits within the rectangle */
   object-fit: contain; /* Ensure the image fits within the rectangle */
   border-radius: 15px;
   position: relative; /* Align the image relative to the card */
   margin: 0 auto 20px auto; /* Center the image and add margin below */
+  left: -10%;
+  top: 10px;
 }
 
 .topicBox {
-  width: 80px;
-  height: 40px;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  font-family: 'TH Sarabun New', sans-serif;
+  width: 370px;
+  height: 120px;
   color: white;
-  font-size: 0.9em;
   position: absolute;
-  bottom: 10px; /* Fixed position under the image */
-  left: 50%;
+  bottom: -90px; /* Fixed position under the image */
+  left: 35.5%;
   transform: translateX(-50%);
   display: flex;
-  justify-content: center;
+  justify-content: flex-start; /* Align text to the left */
   align-items: center;
-  border-radius: 5px;
+  overflow: hidden; /* Ensure text doesn't overflow */
+  padding-left: 10px; /* Add padding to align text inside the box */
+}
+
+.topicText {
+  display: inline-block;
+  white-space: normal; /* Allow text to wrap */
+  word-wrap: break-word; /* Allow words to break within the box */
+  text-align: left; /* Align text to the left */
+  line-height: calc(1.2em + 10px); /* Add space between lines */
+  letter-spacing: 2px; /* Add space between letters */
 }
 
 .cardTitle {
@@ -35,9 +46,12 @@
 }
 
 .cardDeadline {
-  font-size: 1.2em;
-  color: #777;
-  margin-bottom: 10px;
+  font-size: 1.5em;
+  color: #ffffff;
+  position: absolute; /* Position relative to the card */
+  bottom: -485px; /* Align to the bottom of the card */
+  left: 30%;
+  transform: translateX(-50%);
 }
 
 .cardCategory {
