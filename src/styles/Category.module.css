@@ -5,7 +5,7 @@
   }
   
   .categoryTitle {
-    font-size: 1.9em;
+    font-size: 1.5em;
     margin-bottom: 8px;
     color: white;
     position: relative;
@@ -24,7 +24,11 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    bottom: -35px; /* Adjust to position the underline correctly */
+    bottom: 5px; /* Adjust to position the underline correctly */
+  }
+  
+  .camp .categoryTitle::after {
+    background-color: #61dafb; /* Underline color for "Camp" */
   }
   
   .competition .categoryTitle::after {
@@ -45,15 +49,15 @@
     background-color: #545859;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start; /* Align items to the top */
     margin: 20px auto; /* Center the rectangle and add some margin */
-    margin-top: 65px;
-    border-radius: 25px;
+    position: relative; /* Ensure the cardImage can be positioned relative to this container */
   }
   
   .centeredImage {
-    max-width: 100%;
-    max-height: 100%;
+    max-width: calc(100% - 20px); /* Ensure the image fits within the rectangle */
+    max-height: calc(100% - 20px); /* Ensure the image fits within the rectangle */
     object-fit: contain; /* Ensure the image fits within the rectangle */
+    position: relative; /* Ensure the image can be moved within the container */
   }
   

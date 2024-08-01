@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '../styles/Category.module.css';
 import Card from './Card'; // Ensure correct import path
 
-const Category = ({ title, activities = [], currentIndex }) => {
-  console.log('Category Title:', title);
-  console.log('Current Index:', currentIndex);
-  const categoryClass = title.toLowerCase(); // Assumes titles are 'Camp', 'Competition', 'Others'
+const Category = ({ activities = [], title }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const categoryClass = title.toLowerCase(); // Ensure the class name is correctly assigned
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % activities.length);
+    }, 20000); // Switch every 20 seconds
+
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, [activities.length]);
+
   const currentActivity = activities[currentIndex] || {};
 
   return (
@@ -14,11 +22,13 @@ const Category = ({ title, activities = [], currentIndex }) => {
       {currentActivity.imageUrl && (
         <div className={styles.rectangle}>
           <Card
-            title={currentActivity.name}
-            category={title}
+            title={currentActivity.title}
+            category={currentActivity.category}
             description={currentActivity.description || "No description"}
             imageUrls={[currentActivity.imageUrl]}
             date={currentActivity.date || "No date"}
+            deadline={currentActivity.deadline || "No deadline"}
+            topic={currentActivity.topic || "No topic"}
           />
         </div>
       )}

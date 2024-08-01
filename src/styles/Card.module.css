@@ -1,21 +1,42 @@
 .card {
-  border: 1px solid #ddd;
-  border-radius: 10px;
   padding: 20px;
-  margin: 10px 0;
-  background-color: #fff;
   text-align: center;
+  position: relative; /* Ensure the image can be moved within the container */
 }
 
 .cardImage {
-  max-width: 100%;
-  height: auto;
-  border-radius: 10px;
-  margin-bottom: 10px;
+  max-width: calc(100% - 20px); /* Ensure the image fits within the rectangle */
+  max-height: calc(100% - 20px); /* Ensure the image fits within the rectangle */
+  object-fit: contain; /* Ensure the image fits within the rectangle */
+  border-radius: 15px;
+  position: relative; /* Align the image relative to the card */
+  margin: 0 auto 20px auto; /* Center the image and add margin below */
+}
+
+.topicBox {
+  width: 80px;
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  color: white;
+  font-size: 0.9em;
+  position: absolute;
+  bottom: 10px; /* Fixed position under the image */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
 }
 
 .cardTitle {
   font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.cardDeadline {
+  font-size: 1.2em;
+  color: #777;
   margin-bottom: 10px;
 }
 
