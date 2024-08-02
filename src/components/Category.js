@@ -19,17 +19,17 @@ const Category = ({ activities = [], title }) => {
   return (
     <div className={`${styles.category} ${styles[categoryClass]}`}>
       <h2 className={styles.categoryTitle}>{title}</h2>
-      {currentActivity.imageUrl && (
-        <div className={styles.rectangle}>
-          <div className={styles.redflag}>
-            <img src="/redflag.svg" alt="Red Flag" />
-          </div>
-          <div className={styles.blueflag}>
-            <img src="/blueflag.svg" alt="Blue Flag" />
-          </div>
-          <div className={styles.yellowflag}>
-            <img src="/yellowflag.svg" alt="Yellow Flag" />
-          </div>
+      <div className={styles.rectangle}>
+        <div className={styles.redflag}>
+          <img src="/redflag.svg" alt="Red Flag" />
+        </div>
+        <div className={styles.blueflag}>
+          <img src="/blueflag.svg" alt="Blue Flag" />
+        </div>
+        <div className={styles.yellowflag}>
+          <img src="/yellowflag.svg" alt="Yellow Flag" />
+        </div>
+        {currentActivity.imageUrl && (
           <Card
             title={currentActivity.title}
             category={currentActivity.category}
@@ -38,8 +38,11 @@ const Category = ({ activities = [], title }) => {
             topic={currentActivity.topic || "No topic"}
             link={currentActivity.link} // Pass the link to the Card component
           />
+        )}
+        <div className={styles.qrCodeBox}>
+
         </div>
-      )}
+      </div>
       {activities.length > 0 && (
         <div className={styles.activity}>
           <p>{currentActivity.name}</p>

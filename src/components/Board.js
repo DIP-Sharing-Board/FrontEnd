@@ -19,7 +19,6 @@ const Board = () => {
     competition: null,
     other: null,
   });
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const fetchActivities = async (type, lastUpdatedAt) => {
@@ -60,12 +59,9 @@ const Board = () => {
           competition: competitionData.updatedAt,
           other: otherData.updatedAt,
         });
-
-        setLoading(false);
       } catch (err) {
         console.error('Error fetching all activities:', err);
         setError(err.message);
-        setLoading(false);
       }
     };
 
@@ -86,18 +82,9 @@ const Board = () => {
     return () => clearInterval(switchInterval);
   }, [activities]);
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    return <p>Error: {error}</p>;
-  }
-
-  console.log('Activities:', activities);
-
   return (
     <div className={styles.board}>
+      {error && <p>Error: {error}</p>}
       {['camp', 'competition', 'other'].map((category) => (
         <div key={category}>
           <Category
