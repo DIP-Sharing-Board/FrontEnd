@@ -48,11 +48,11 @@ const Board = () => {
 
         console.log('Fetched Data:', { campData, competitionData, otherData });
 
-        // Limit each category to the 20 latest entries
+        // Limit each category to the 20 latest entries and filter out activities without imageUrls
         setActivities({
-          camp: (campData.data || []).slice(-20),
-          competition: (competitionData.data || []).slice(-20),
-          other: (otherData.data || []).slice(-20),
+          camp: (campData.data || []).filter(activity => activity.imageUrl).slice(-20),
+          competition: (competitionData.data || []).filter(activity => activity.imageUrl).slice(-20),
+          other: (otherData.data || []).filter(activity => activity.imageUrl).slice(-20),
         });
 
         setUpdatedAt({
@@ -69,10 +69,9 @@ const Board = () => {
       }
     };
 
-    fetchAllActivities();
-    const interval = setInterval(fetchAllActivities, 10000);
+    const fetchInterval = setInterval(fetchAllActivities, 1800000); // Fetch data every 30 minutes
 
-    return () => clearInterval(interval);
+    return () => clearInterval(fetchInterval);
   }, [updatedAt]);
 
   useEffect(() => {
@@ -82,7 +81,7 @@ const Board = () => {
         competition: activities.competition.length > 0 ? (prevIndices.competition + 1) % activities.competition.length : 0,
         other: activities.other.length > 0 ? (prevIndices.other + 1) % activities.other.length : 0,
       }));
-    }, 20000); // Switch every 20 seconds
+    }, 25000); // Switch every 25 seconds
 
     return () => clearInterval(switchInterval);
   }, [activities]);

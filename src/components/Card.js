@@ -5,7 +5,9 @@ import QRCode from 'qrcode.react';
 import styles from '../styles/Card.module.css';
 
 const formatThaiDate = (dateString) => {
+  if (!dateString) return "ไม่ระบุ"; // Return "ไม่ระบุ" if no dateString is provided
   const date = new Date(dateString);
+  if (isNaN(date.getTime())) return "ไม่ระบุ"; // Return "ไม่ระบุ" if date is invalid
   const day = date.getDate();
   const month = date.toLocaleString('th-TH', { month: 'short' });
   const year = date.getFullYear() + 543; // Convert AD to BE
@@ -58,14 +60,14 @@ const Card = ({ title, category, description, imageUrls, date, deadline, topic, 
         </div>
       )}
       <div className={styles.topicBox}>
-        <span ref={topicRef} className={styles.topicText}>{topic}</span>
+        <span ref={topicRef} className={styles.topicText}>{topic || 'ไม่ระบุ'}</span>
       </div>
       <h3 className={styles.cardTitle}>{title}</h3>
       <p className={styles.cardCategory}>{category}</p>
       <p className={styles.cardDescription}>{description}</p>
       <p className={styles.cardDate}>{date}</p>
       <div className={styles.qrCodeBox}>
-      <p className={styles.cardDeadline}>ปิดรับสมัครวันที่ {formatThaiDate(deadline)}</p>
+        <p className={styles.cardDeadline}>ปิดรับสมัครวันที่ {formatThaiDate(deadline)}</p>
         <div className={styles.scan}>scan here</div>
         <QRCode value={link} size={128} />
       </div>
