@@ -47,7 +47,6 @@ const Board = () => {
 
         console.log('Fetched Data:', { campData, competitionData, otherData });
 
-        // Limit each category to the 20 latest entries and filter out activities without imageUrls
         setActivities({
           camp: (campData.data || []).filter(activity => activity.imageUrl).slice(-20),
           competition: (competitionData.data || []).filter(activity => activity.imageUrl).slice(-20),
@@ -65,7 +64,7 @@ const Board = () => {
       }
     };
 
-    const fetchInterval = setInterval(fetchAllActivities, 1800000); // Fetch data every 30 minutes
+    const fetchInterval = setInterval(fetchAllActivities, 10000);
 
     return () => clearInterval(fetchInterval);
   }, [updatedAt]);
@@ -77,7 +76,7 @@ const Board = () => {
         competition: activities.competition.length > 0 ? (prevIndices.competition + 1) % activities.competition.length : 0,
         other: activities.other.length > 0 ? (prevIndices.other + 1) % activities.other.length : 0,
       }));
-    }, 25000); // Switch every 25 seconds
+    }, 25000);
 
     return () => clearInterval(switchInterval);
   }, [activities]);
@@ -89,8 +88,8 @@ const Board = () => {
         <div key={category}>
           <Category
             title={category.charAt(0).toUpperCase() + category.slice(1)}
-            activities={activities[category] || []} // Ensure activities is always an array
-            currentIndex={currentIndices[category]} // Pass the current index for switching
+            activities={activities[category] || []}
+            currentIndex={currentIndices[category]}
           />
         </div>
       ))}
