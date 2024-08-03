@@ -20,6 +20,7 @@ const Board = () => {
     other: null,
   });
   const [error, setError] = useState(null);
+  const [initialFetch, setInitialFetch] = useState(false);
 
   const fetchActivities = async (type, lastUpdatedAt) => {
     try {
@@ -39,6 +40,7 @@ const Board = () => {
   useEffect(() => {
     const fetchAllActivities = async () => {
       try {
+        console.log("Fetching all activities...");
         const [campData, competitionData, otherData] = await Promise.all([
           fetchActivities('camp', updatedAt.camp),
           fetchActivities('competition', updatedAt.competition),
@@ -58,28 +60,34 @@ const Board = () => {
           competition: competitionData.updatedAt,
           other: otherData.updatedAt,
         });
+
+        setInitialFetch(true); // Set initial fetch to true after first fetch
       } catch (err) {
         console.error('Error fetching all activities:', err);
         setError(err.message);
       }
     };
 
-    const fetchInterval = setInterval(fetchAllActivities, 10000);
+    fetchAllActivities();
+    const fetchInterval = setInterval(fetchAllActivities, 30000); // Fetch data every 30 seconds
 
     return () => clearInterval(fetchInterval);
-  }, [updatedAt]);
+  }, []);
 
   useEffect(() => {
-    const switchInterval = setInterval(() => {
-      setCurrentIndices((prevIndices) => ({
-        camp: activities.camp.length > 0 ? (prevIndices.camp + 1) % activities.camp.length : 0,
-        competition: activities.competition.length > 0 ? (prevIndices.competition + 1) % activities.competition.length : 0,
-        other: activities.other.length > 0 ? (prevIndices.other + 1) % activities.other.length : 0,
-      }));
-    }, 25000);
+    if (initialFetch) {
+      const switchInterval = setInterval(() => {
+        setCurrentIndices((prevIndices) => ({
+          camp: activities.camp.length > 0 ? (prevIndices.camp + 1) % activities.camp.length : 0,
+          competition: activities.competition.length > 0 ? (prevIndices.competition + 1) % activities.competition.length : 0,
+          other: activities.other.length > 0 ? (prevIndices.other + 1) % activities.other.length : 0,
+        }));
+        console.log('Switched indices:', currentIndices);
+      }, 25000); // Switch every 25 seconds
 
-    return () => clearInterval(switchInterval);
-  }, [activities]);
+      return () => clearInterval(switchInterval);
+    }
+  }, [activities, initialFetch]);
 
   return (
     <div className={styles.board}>

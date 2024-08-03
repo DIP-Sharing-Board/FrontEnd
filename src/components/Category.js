@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../styles/Category.module.css';
-import Card from './Card'; // Ensure correct import path
+import Card from './Card';
 
-const Category = ({ activities = [], title }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const categoryClass = title.toLowerCase(); // Ensure the class name is correctly assigned
+const Category = ({ activities = [], title, currentIndex }) => {
+  const categoryClass = title.toLowerCase();
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % activities.length);
-    }, 25000); // Switch every 25 seconds
-
-    return () => clearInterval(interval); // Cleanup on unmount
-  }, [activities.length]);
+    console.log(`Rendering Category: ${title} with activities:`, activities);
+    console.log(`Current index for ${title}:`, currentIndex);
+  }, [activities, currentIndex, title]);
 
   const currentActivity = activities[currentIndex] || {};
 
@@ -26,22 +22,18 @@ const Category = ({ activities = [], title }) => {
         <div className={styles.blueflag}>
           <img src="/blueflag.svg" alt="Blue Flag" />
         </div>
-        <div className={styles.yellowflag}>
-          <img src="/yellowflag.svg" alt="Yellow Flag" />
-        </div>
-        {currentActivity.imageUrl && (
+        {currentActivity.imageUrl ? (
           <Card
             title={currentActivity.title}
             category={currentActivity.category}
             imageUrls={[currentActivity.imageUrl]}
             deadline={currentActivity.deadline || "No deadline"}
             topic={currentActivity.topic || "No topic"}
-            link={currentActivity.link} // Pass the link to the Card component
+            link={currentActivity.link}
           />
+        ) : (
+          <p>No activities available</p>
         )}
-        <div className={styles.qrCodeBox}>
-
-        </div>
       </div>
       {activities.length > 0 && (
         <div className={styles.activity}>
