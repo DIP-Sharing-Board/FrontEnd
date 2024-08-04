@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'THSarabunNew';
+  src: url('/fonts/THSarabunNew.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .category {
     border-radius: 8px;
     padding: 16px;
@@ -9,7 +16,7 @@
     margin-bottom: 8px;
     color: white;
     position: relative;
-    margin-top: -20px; /* Move the title up by 20px */
+    margin-top: -30px; /* Move the title up by 20px */
   }
   
   .categoryTitle::after {
@@ -24,7 +31,7 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    bottom: -35px; /* Adjust to position the underline correctly */
+    bottom: -20px; /* Adjust to position the underline correctly */
   }
   
   .camp .categoryTitle::after {
@@ -53,7 +60,7 @@
     align-items: flex-start; /* Align items to the top */
     margin: 20px auto; /* Center the rectangle and add some margin */
     position: relative; /* Ensure the cardImage can be positioned relative to this container */
-    margin-top: 70px;
+    margin-top: 50px;
   }
   
   .bookmark {
@@ -70,7 +77,7 @@
   
   .redflag {
     position: absolute;
-    top: -0.4px;
+    top: 0px;
     right:  661.5px;
     z-index: 40;
   }

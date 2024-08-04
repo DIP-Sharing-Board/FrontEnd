@@ -22,6 +22,9 @@ const Category = ({ activities = [], title, currentIndex }) => {
         <div className={styles.blueflag}>
           <img src="/blueflag.svg" alt="Blue Flag" />
         </div>
+        <div className={styles.yellowflag}>
+          <img src="/yellowflag.svg" alt="Yellow Flag" />
+        </div>
         {currentActivity.imageUrl ? (
           <Card
             title={currentActivity.title}

@@ -1,5 +1,5 @@
 @font-face {
-  font-family: 'TH Sarabun New';
+  font-family: 'THSarabunNew';
   src: url('/fonts/THSarabunNew.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
@@ -23,7 +23,7 @@
 }
 
 .topicBox {
-  font-family: 'TH Sarabun New', sans-serif;
+  font-family: 'THSarabunNew', sans-serif;
   width: 370px;
   height: 120px;
   color: white;
@@ -53,7 +53,7 @@
 }
 
 .cardDeadline {
-  font-family: 'TH Sarabun New', sans-serif;
+  font-family: 'THSarabunNew', sans-serif;
   font-size: 2.1rem;
   font-weight: lighter;
   color: #EDEDED;
@@ -90,8 +90,8 @@
 }
 
 .scan {
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   color: #D7D8DD;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   letter-spacing: 2px;
 }
