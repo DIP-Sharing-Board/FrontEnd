@@ -25,3 +25,17 @@
   margin: 0;
   font-family: 'THSarabunNew', sans-serif;
 }
+
+.flagContainer {
+  position: absolute;
+  top: 232px;
+  left: 480px;
+  display: flex;
+  gap: 485px;
+  z-index: 1001;
+}
+
+.flagContainer img {
+  width: 150px;
+  height: 150px;
+}

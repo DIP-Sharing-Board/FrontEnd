@@ -61,7 +61,7 @@ const Board = () => {
           other: otherData.updatedAt,
         });
 
-        setInitialFetch(true); // Set initial fetch to true after first fetch
+        setInitialFetch(true);
       } catch (err) {
         console.error('Error fetching all activities:', err);
         setError(err.message);
@@ -69,7 +69,7 @@ const Board = () => {
     };
 
     fetchAllActivities();
-    const fetchInterval = setInterval(fetchAllActivities, 30000); // Fetch data every 30 seconds
+    const fetchInterval = setInterval(fetchAllActivities, 30000);
 
     return () => clearInterval(fetchInterval);
   }, []);
@@ -83,7 +83,7 @@ const Board = () => {
           other: activities.other.length > 0 ? (prevIndices.other + 1) % activities.other.length : 0,
         }));
         console.log('Switched indices:', currentIndices);
-      }, 25000); // Switch every 25 seconds
+      }, 25000);
 
       return () => clearInterval(switchInterval);
     }

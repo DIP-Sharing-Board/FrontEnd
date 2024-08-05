@@ -3,12 +3,12 @@ import QRCode from 'qrcode.react';
 import styles from '../styles/Card.module.css';
 
 const formatThaiDate = (dateString) => {
-  if (!dateString) return "ไม่ระบุ"; // Return "ไม่ระบุ" if no dateString is provided
+  if (!dateString) return "ไม่ระบุ";
   const date = new Date(dateString);
-  if (isNaN(date.getTime())) return "ไม่ระบุ"; // Return "ไม่ระบุ" if date is invalid
+  if (isNaN(date.getTime())) return "ไม่ระบุ";
   const day = date.getDate();
   const month = date.toLocaleString('th-TH', { month: 'short' });
-  const year = date.getFullYear() + 543; // Convert AD to BE
+  const year = date.getFullYear() + 543;
   return `${day} ${month} ${year}`;
 };
 
@@ -19,12 +19,12 @@ const Card = ({ title, category, description, imageUrls, date, deadline, topic, 
   useEffect(() => {
     const adjustFontSize = () => {
       const element = topicRef.current;
-      if (!element) return; // Check if element is not null
+      if (!element) return;
       const parent = element.parentNode;
       const parentHeight = parent.clientHeight;
       const parentWidth = parent.clientWidth;
       let fontSize = parseInt(window.getComputedStyle(element).fontSize);
-      const minFontSize = 12; // Minimum font size is 1.2rem (12px)
+      const minFontSize = 12;
 
       element.style.fontSize = `${fontSize}px`;
       element.style.whiteSpace = 'nowrap';
@@ -55,7 +55,6 @@ const Card = ({ title, category, description, imageUrls, date, deadline, topic, 
   }, [topic, isLoaded]);
 
   useEffect(() => {
-    // Simulate data loading to ensure all data is available before rendering the specific elements
     setIsLoaded(true);
   }, []);
 

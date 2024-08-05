@@ -63,39 +63,6 @@
     margin-top: 50px;
   }
   
-  .bookmark {
-    width: 50px;
-    height: 150px;
-    background-color: #ff5c5c;
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    z-index: 10; /* Ensure the bookmark appears above other content */
-    clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 95%, 0 85%);
-    border-radius: 0 0 10px 10px;
-  }
-  
-  .redflag {
-    position: absolute;
-    top: 0px;
-    right:  661.5px;
-    z-index: 40;
-  }
-  
-  .blueflag {
-    position: absolute;
-    top: 0px;
-    right: 1294.8px;
-    z-index: 60;
-  }
-  
-  .yellowflag {
-    position: absolute;
-    top: 0px;
-    right: 28px;
-    z-index: 10;;
-  }
-  
   .centeredImage {
     max-width: calc(100% - 20px); /* Ensure the image fits within the rectangle */
     max-height: calc(100% - 20px); /* Ensure the image fits within the rectangle */

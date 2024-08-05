@@ -28,7 +28,7 @@
   height: 120px;
   color: white;
   position: absolute;
-  bottom: -90px; /* Fixed position under the image */
+  bottom: -50px; /* Fixed position under the image */
   left: 35.5%;
   transform: translateX(-50%);
   display: flex;
