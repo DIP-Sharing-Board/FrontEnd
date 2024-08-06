@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Category from '../components/Category';
 import styles from '../styles/Board.module.css';
+import { matchInstagramImage } from './matchInstagramImage';
 
 const Board = () => {
   const [activities, setActivities] = useState({
@@ -24,12 +25,25 @@ const Board = () => {
 
   const fetchActivities = async (type, lastUpdatedAt) => {
     try {
-      const url = lastUpdatedAt 
+      const url = lastUpdatedAt
         ? `http://localhost:5000/api/v1/activities?type=${type}&updatedAt=${lastUpdatedAt}`
         : `http://localhost:5000/api/v1/activities?type=${type}`;
       console.log(`Fetching activities for: ${type} from ${url}`);
       const response = await axios.get(url);
       console.log(`Data for ${type}:`, response.data);
+
+      // update instagram url to calling stream-image service *Avoid CORS*
+      response.data.data = response.data.data.map((data) => {
+        if (matchInstagramImage(data.imageUrl)) {
+          return {
+            ...data,
+            imageUrl: `http://localhost:3000/stream-image?url=${encodeURIComponent(data.imageUrl)}`
+          }
+        } else return data
+      }
+      )
+      console.log(response.data.data)
+
       return response.data;
     } catch (err) {
       console.error(`Failed to fetch ${type} activities: ${err.message}`);
