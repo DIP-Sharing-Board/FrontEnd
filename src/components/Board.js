@@ -28,21 +28,18 @@ const Board = () => {
       const url = lastUpdatedAt
         ? `http://localhost:5000/api/v1/activities?type=${type}&updatedAt=${lastUpdatedAt}`
         : `http://localhost:5000/api/v1/activities?type=${type}`;
-      console.log(`Fetching activities for: ${type} from ${url}`);
       const response = await axios.get(url);
-      console.log(`Data for ${type}:`, response.data);
 
       // update instagram url to calling stream-image service *Avoid CORS*
       response.data.data = response.data.data.map((data) => {
         if (matchInstagramImage(data.imageUrl)) {
           return {
             ...data,
-            imageUrl: `http://localhost:3000/stream-image?url=${encodeURIComponent(data.imageUrl)}`
+            imageUrl: `http://localhost:7000/stream-image?url=${encodeURIComponent(data.imageUrl)}`
           }
         } else return data
       }
       )
-      console.log(response.data.data)
 
       return response.data;
     } catch (err) {
@@ -54,19 +51,16 @@ const Board = () => {
   useEffect(() => {
     const fetchAllActivities = async () => {
       try {
-        console.log("Fetching all activities...");
         const [campData, competitionData, otherData] = await Promise.all([
           fetchActivities('camp', updatedAt.camp),
           fetchActivities('competition', updatedAt.competition),
           fetchActivities('other', updatedAt.other),
         ]);
 
-        console.log('Fetched Data:', { campData, competitionData, otherData });
-
         setActivities({
-          camp: (campData.data || []).filter(activity => activity.imageUrl).slice(-20),
-          competition: (competitionData.data || []).filter(activity => activity.imageUrl).slice(-20),
-          other: (otherData.data || []).filter(activity => activity.imageUrl).slice(-20),
+          camp: (campData.data || []).slice(-20),
+          competition: (competitionData.data || []).slice(-20),
+          other: (otherData.data || []).slice(-20),
         });
 
         setUpdatedAt({
@@ -83,7 +77,7 @@ const Board = () => {
     };
 
     fetchAllActivities();
-    const fetchInterval = setInterval(fetchAllActivities, 30000);
+    const fetchInterval = setInterval(fetchAllActivities, 1800000);
 
     return () => clearInterval(fetchInterval);
   }, []);
@@ -96,7 +90,6 @@ const Board = () => {
           competition: activities.competition.length > 0 ? (prevIndices.competition + 1) % activities.competition.length : 0,
           other: activities.other.length > 0 ? (prevIndices.other + 1) % activities.other.length : 0,
         }));
-        console.log('Switched indices:', currentIndices);
       }, 25000);
 
       return () => clearInterval(switchInterval);

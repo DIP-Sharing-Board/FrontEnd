@@ -5,11 +5,6 @@ import Card from './Card';
 const Category = ({ activities = [], title, currentIndex }) => {
   const categoryClass = title.toLowerCase();
 
-  useEffect(() => {
-    console.log(`Rendering Category: ${title} with activities:`, activities);
-    console.log(`Current index for ${title}:`, currentIndex);
-  }, [activities, currentIndex, title]);
-
   const currentActivity = activities[currentIndex] || {};
 
   return (
