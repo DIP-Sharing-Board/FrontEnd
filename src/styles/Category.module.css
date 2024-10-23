@@ -1,0 +1,72 @@
+@font-face {
+  font-family: 'THSarabunNew';
+  src: url('/fonts/THSarabunNew.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.category {
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+  }
+  
+  .categoryTitle {
+    font-size: 1.9em;
+    margin-bottom: 8px;
+    color: white;
+    position: relative;
+    margin-top: -30px; /* Move the title up by 20px */
+  }
+  
+  .categoryTitle::after {
+    content: '';
+    display: block;
+    height: 13px;
+    width: 140px;
+    margin: 10px auto 0;
+    border-radius: 18px;
+    margin-top: 20px;
+    background-color: #61dafb; /* Default underline color */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -20px; /* Adjust to position the underline correctly */
+  }
+  
+  .camp .categoryTitle::after {
+    background-color: #61dafb; /* Underline color for "Camp" */
+  }
+  
+  .competition .categoryTitle::after {
+    background-color: #FF5C5C; /* Underline color for "Competition" */
+  }
+  
+  .other .categoryTitle::after {
+    background-color: #EBDF73; /* Underline color for "Others" */
+  }
+  
+  .activity {
+    margin: 8px 0;
+  }
+  
+  .rectangle {
+    width: 596px;
+    height: 810px;
+    border-radius: 20px;
+    background-color: #545859;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align items to the top */
+    margin: 20px auto; /* Center the rectangle and add some margin */
+    position: relative; /* Ensure the cardImage can be positioned relative to this container */
+    margin-top: 50px;
+  }
+  
+  .centeredImage {
+    max-width: calc(100% - 20px); /* Ensure the image fits within the rectangle */
+    max-height: calc(100% - 20px); /* Ensure the image fits within the rectangle */
+    object-fit: contain; /* Ensure the image fits within the rectangle */
+    position: relative; /* Ensure the image can be moved within the container */
+  }
+  

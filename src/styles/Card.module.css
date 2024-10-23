@@ -1,0 +1,97 @@
+@font-face {
+  font-family: 'THSarabunNew';
+  src: url('/fonts/THSarabunNew.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.card {
+  padding: 20px;
+  text-align: center;
+  position: relative; /* Ensure the image can be moved within the container */
+}
+
+.cardImage {
+  max-width: calc(75%); /* Ensure the image fits within the rectangle */
+  max-height: calc(75%); /* Ensure the image fits within the rectangle */
+  object-fit: contain; /* Ensure the image fits within the rectangle */
+  border-radius: 15px;
+  position: relative; /* Align the image relative to the card */
+  margin: 0 auto 20px auto; /* Center the image and add margin below */
+  left: -10%;
+  top: 10px;
+}
+
+.topicBox {
+  font-family: 'THSarabunNew', sans-serif;
+  width: 370px;
+  height: 120px;
+  color: white;
+  position: absolute;
+  bottom: -50px; /* Fixed position under the image */
+  left: 35.5%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: flex-start; /* Align text to the left */
+  align-items: center;
+  overflow: hidden; /* Ensure text doesn't overflow */
+  padding-left: 10px; /* Add padding to align text inside the box */
+}
+
+.topicText {
+  display: inline-block;
+  white-space: normal; /* Allow text to wrap */
+  word-wrap: break-word; /* Allow words to break within the box */
+  text-align: left; /* Align text to the left */
+  line-height: calc(1.2em + 10px); /* Add space between lines */
+  letter-spacing: 2px; /* Add space between letters */
+}
+
+.cardTitle {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.cardDeadline {
+  font-family: 'THSarabunNew', sans-serif;
+  font-size: 2.1rem;
+  font-weight: lighter;
+  color: #EDEDED;
+  position: absolute; /* Position relative to the card */
+  bottom: -20px; /* Align to the bottom of the card */
+  left: -140%;
+  margin-left: -230px;
+  letter-spacing: 2px;
+}
+
+.cardCategory {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.cardDescription {
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+
+.cardDate {
+  font-size: 0.9em;
+  color: #777;
+}
+
+/* Add these styles to your Card.module.css */
+
+.qrCodeBox {
+  position: fixed;
+  text-align: center;
+  margin-top: 10px;
+  top: 835px;
+  margin-left: 420px;
+}
+
+.scan {
+  font-size: 1.8rem;
+  color: #D7D8DD;
+  margin-bottom: 5px;
+  letter-spacing: 2px;
+}
