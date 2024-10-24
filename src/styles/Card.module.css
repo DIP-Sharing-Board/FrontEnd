@@ -13,7 +13,7 @@
 
 .cardImage {
   max-width: calc(75%); /* Ensure the image fits within the rectangle */
-  max-height: calc(75%); /* Ensure the image fits within the rectangle */
+  max-height: calc(67%); /* Ensure the image fits within the rectangle */
   object-fit: contain; /* Ensure the image fits within the rectangle */
   border-radius: 15px;
   position: relative; /* Align the image relative to the card */
